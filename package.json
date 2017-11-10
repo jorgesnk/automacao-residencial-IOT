@@ -1,0 +1,16 @@
+{
+  "name": "automacao",
+  "version": "1.0.0",
+  "description": "projeto para automacao residencial",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "author": "jorge",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mqtt": "^2.14.0",
+    "socket.io": "^2.0.4"
+  }
+}
