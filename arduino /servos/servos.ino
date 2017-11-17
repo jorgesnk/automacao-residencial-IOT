@@ -12,7 +12,7 @@ Servo myservo;
   long lastMsg = 0;
   char msg[50];
   int value = 0;
-  const char* mqtt_server = "192.168.0.23";
+  const char* mqtt_server = "45.77.112.250";
                 
 void setup() { 
   myservo.attach(D2);  

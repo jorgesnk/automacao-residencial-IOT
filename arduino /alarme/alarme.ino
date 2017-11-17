@@ -11,7 +11,7 @@
   long lastMsg = 0;
   char msg[50];
   int value = 0;
-  const char* mqtt_server = "192.168.0.23";
+  const char* mqtt_server = "45.77.112.250";
 
   int sensor=D2;
   int buzer= D1;
@@ -35,13 +35,20 @@ void setup() {
         data += (char)payload[i];
       }
 
-      Serial.print(topico);
-      if(topico=="porta"){
+    
+      if(topico=="alarme"){
         StaticJsonBuffer<300> JSONBuffer; 
         JsonObject& parsed = JSONBuffer.parseObject(data); 
         const char * comando = parsed["comando"]; 
         Serial.println(comando);
-        
+        String valida= comando;
+        if(valida=="ativar"){
+          Serial.print("Passei");
+          ativar=true;
+        }
+        else{
+          ativar=false;
+        }
       }
   }
 
@@ -78,18 +85,22 @@ void setup() {
   void alarme(){
     
     int valorSensor=digitalRead(sensor);
-    Serial.println(valorSensor);
+
     if(valorSensor==1){
-       char* valorJson="{alarme:'tocar'}";
+       char* valorJson="tocar";
        ativar=true;
        client.publish("alarme",valorJson);
     }
-
-    if(ativar==true){
+    if(digitalRead(buzer)==0){
+      if(ativar==true){
       digitalWrite(buzer,HIGH);
     }
-    delay(2000);
-    digitalWrite(buzer,LOW);
+    }
+    
+    else{
+      digitalWrite(buzer,LOW);  
+    }
+    
  
     
   }
